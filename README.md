@@ -1,3 +1,7 @@
+npm run client (in root)
+npm start (server folder)
+
+
 # diff-sync-js
 
 A JavaScript implementation of Neil Fraser Differential Synchronization Algorithm
