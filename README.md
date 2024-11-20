@@ -79,6 +79,17 @@ function receivePatch(payload) {
 ```
 
 **3. Are the JSON documents interchangeable with other kinds of documents?**
+Yes, the algorithm works with any data that can be represented as JSON. This includes most data structures in JavaScript, such as objects, arrays,  and strings. If you have documents in other formats (like XML or custom  binary formats), you'll need to convert them to JSON before using the  diff-sync algorithm.
+
+For example, if you're working with plain text documents, you can represent them as strings in JSON. The `strPatch` method in the code helps apply patches to string data:
+
+```javascript
+
+strPatch(val, patch) {
+    const newDoc = this.jsonpatch.applyPatch(val.split(''), patch).newDocument;
+    return typeof newDoc === 'string' ? newDoc : newDoc.join('');
+}
+```
 
 **4. How is Mr. Wei solving the conflicts?**
 
@@ -89,7 +100,7 @@ Mr. Wei's implementation handles conflicts using a combination of shadow copies 
 
 Here's a code snippet illustrating this from `src/index.js`:
 
-```
+```javascript
 
 if (useBackup) {
     if (shadow[thisVersion] !== payload[thisVersion]) {
