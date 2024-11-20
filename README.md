@@ -14,6 +14,35 @@ However, the core algorithm can be adapted for P2P communication. You would need
 
 
 
+**4. How is Mr. Wei solving the conflicts?**
+
+Mr. Wei's implementation handles conflicts using a combination of shadow copies  and backup copies of the documents. When a client or server receives a  patch, it checks version numbers to detect conflicts. If a conflict is  detected (e.g., version numbers don't match), it attempts to resolve it  by:
+
+- **Reverting to a Backup**: If the shadow's  version doesn't match the received version but the backup's version  does, it reverts the shadow to the backup state.
+- **Discarding Changes**: If neither the shadow nor the backup versions match, it may discard the changes to prevent inconsistent states.
+
+Here's a code snippet illustrating this from `src/index.js`:
+
+```
+
+if (useBackup) {
+    if (shadow[thisVersion] !== payload[thisVersion]) {
+        // Versions don't match
+        if (backup[thisVersion] === payload[thisVersion]) {
+            // Revert to backup
+            shadow.value = jsonpatch.deepClone(backup.value);
+            shadow[thisVersion] = backup[thisVersion];
+            shadow.edits = [];
+        } else {
+            // Cannot resolve conflict, drop the process
+            return;
+        }
+    }
+}
+```
+
+This mechanism ensures that both parties stay synchronized by resolving conflicts based on version control.
+
 
 
 
