@@ -1,6 +1,22 @@
 npm run client (in root)
 npm start (server folder)
 
+# Sutaj Drinor & Sherifi Luan Docs
+**1. Is it possible to deploy a Peer-to-Peer version of Mr. Wei implementation?**
+
+Mr. Wei's implementation of the Differential Synchronization Algorithm is built  on a client-server architecture using WebSockets for real-time  communication. Deploying a Peer-to-Peer (P2P) version would require  significant modifications because the current setup relies on a central  server to coordinate state and handle synchronization between clients.
+
+However, the core algorithm can be adapted for P2P communication. You would need to replace the central server with a P2P communication layer, such as  WebRTC, which allows direct communication between browsers. This  involves:
+
+- **Peer Discovery**: Implementing a mechanism for peers to find and connect with each other.
+- **Connection Management**: Handling the establishment and maintenance of P2P connections.
+- **Message Passing**: Modifying the message handling to route synchronization messages between peers instead of through a server.
+
+
+
+
+
+
 
 # diff-sync-js
 
