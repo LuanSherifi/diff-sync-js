@@ -134,6 +134,17 @@ Possible enhancements include:
 If you have specific improvements in mind and are willing to implement  them, contributing via a pull request would be beneficial. Ensure that  your contributions align with the project's coding standards and include appropriate tests and documentation.
 
 
+**6. Is it possible to combine `diff-sync-js` with a document-oriented NoSQL datastore?**
+
+Yes, integrating `diff-sync-js` with a document-oriented NoSQL datastore like MongoDB is feasible and  can enhance data persistence and scalability. Here's a possi
+
+- **Server-Side Integration**: Modify the server code to read from and write to the NoSQL database instead of keeping the main document solely in memory.
+
+- **Handling Concurrency**: Implement mechanisms to handle concurrent updates, possibly using  database features like atomic operations or versioning fields.
+- **Client-Side Synchronization**: Clients continue to use the diff-sync algorithm as usual, unaware of the backend data store.
+
+Integrating with a NoSQL datastore allows for persistent storage of documents and  can support scenarios where clients need to reconnect and synchronize  after being offline.
+
 # diff-sync-js
 
 A JavaScript implementation of Neil Fraser Differential Synchronization Algorithm
