@@ -110,7 +110,17 @@ if (useBackup) {
 This mechanism ensures that both parties stay synchronized by resolving conflicts based on version control.
 
 
+**5. What are possible enhancements of Mr. Wei's code? Should you suggest a pull request?**
 
+Possible enhancements include:
+
+- **P2P Support**: Modifying the implementation to support peer-to-peer synchronization using technologies like WebRTC.
+- **Optimized Patch Generation**: Improving the efficiency of patch generation and application, especially for large documents.
+- **Modular Design**: Refactoring the code to be more modular, making it easier to integrate into various projects.
+- **Improved Error Handling**: Adding more robust error handling and recovery mechanisms.
+- **Documentation and Examples**: Expanding the documentation and providing more usage examples to help new users.
+
+If you have specific improvements in mind and are willing to implement  them, contributing via a pull request would be beneficial. Ensure that  your contributions align with the project's coding standards and include appropriate tests and documentation.
 
 
 # diff-sync-js
