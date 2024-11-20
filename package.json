@@ -15,6 +15,7 @@
     "scripts": {
         "prepublish": "babel src --out-dir lib --ignore \"**/*.test.js\"",
         "build": "babel src --out-dir lib --ignore \"**/*.test.js\"",
+        "client": "http-server demo/client",
         "test": "jest"
     },
     "homepage": "https://github.com/weijie0192/diff-sync-js#readme",
@@ -27,7 +28,8 @@
         "babel-preset-es2015": "^6.24.1",
         "faker": "5.5.3",
         "fast-json-patch": "^3.1.0",
-        "jest": "^27.4.7"
+        "jest": "^27.4.7",
+        "http-server": "14.1.1"
     },
     "keywords": [
         "differential synchronization",

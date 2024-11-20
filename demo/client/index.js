@@ -42,8 +42,8 @@ window.onload = function () {
         var container = {};
 
         // Create WebSocket connection.
-        const url = window.location.hostname.includes("wztechs") ? "ws://142.11.215.231:42998" : "ws://localhost:42998";
-        var socket = new WebSocket(url);
+        // const url = window.location.hostname.includes("wztechs") ? "ws://142.11.215.231:42998" : "ws://localhost:42998";
+        var socket = new WebSocket("ws://10.0.107.234:42998");
         // Connection opened
         socket.addEventListener("open", function (event) {
             $status.innerHTML = "ONLINE";
