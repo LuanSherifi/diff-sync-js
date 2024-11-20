@@ -12,7 +12,73 @@ However, the core algorithm can be adapted for P2P communication. You would need
 - **Connection Management**: Handling the establishment and maintenance of P2P connections.
 - **Message Passing**: Modifying the message handling to route synchronization messages between peers instead of through a server.
 
+**2. How is it possible to use the API in other JS projects?**
 
+Mr. Wei's code exports a `DiffSyncAlghorithm` class, which you can import and use in your own JavaScript projects. Here's how you can integrate it:
+
+- **Installation**: If the package is published on npm, you can install it using `npm install diff-sync-js`. Otherwise, you can include the source code directly in your project.
+- **Usage**: Import and initialize the `DiffSyncAlghorithm` class in your code.
+
+```javascript
+
+const DiffSyncAlgorithm = require('diff-sync-js'); // Adjust the path or package name as necessary
+const jsonpatch = require('fast-json-patch'); // Ensure you have this dependency
+
+const diffSync = new DiffSyncAlgorithm({
+    jsonpatch: jsonpatch,
+    thisVersion: 'n',
+    senderVersion: 'm',
+    useBackup: true,
+    debug: true
+});
+
+// Initialize the container and main text
+let container = {};
+let mainText = ''; // Your initial document state
+diffSync.initObject(container, mainText);
+
+// Example of sending patches
+function sendPatch(newText) {
+    diffSync.onSend({
+        container,
+        mainText: newText,
+        whenSend: (m, edits) => {
+            // Send the patch to the other party
+            sendMessage({
+                type: 'PATCH',
+                payload: {
+                    m,
+                    edits
+                }
+            });
+        },
+        whenUnchange: (m) => {
+            // Optionally handle cases where there is no change
+        }
+    });
+}
+
+// Example of receiving patches
+function receivePatch(payload) {
+    diffSync.onReceive({
+        payload,
+        container,
+        onUpdateShadow: (shadow, patch) => {
+            // Update the shadow document
+            return diffSync.strPatch(shadow.value, patch);
+        },
+        onUpdateMain: (patches, operations) => {
+            // Apply the changes to your main document
+            mainText = diffSync.strPatch(mainText, operations);
+        },
+        afterUpdate: () => {
+            // Optionally send acknowledgments or further patches
+        }
+    });
+}
+```
+
+**3. Are the JSON documents interchangeable with other kinds of documents?**
 
 **4. How is Mr. Wei solving the conflicts?**
 
